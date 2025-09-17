@@ -22,7 +22,7 @@
       <li><a href="#about" @click="scrollToSection">Sobre mí</a></li>
       <li><a href="#skills" @click="scrollToSection">Habilidades</a></li>
       <li>
-        <a href="/cv.pdf" class="btn-cv" download="Thomas_Linares_CV.pdf" @click="downloadCV">
+        <a :href="cvPublicPath" class="btn-cv" :download="cvFileName" @click="downloadCV">
           <span>Descargar CV</span>
         </a>
       </li>
@@ -33,60 +33,50 @@
 <script>
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      cvFileName: 'Thomas_Linares_CV.pdf',
+      cvPublicPath: `${import.meta.env.BASE_URL}cv.pdf`,
+    }
+  },
   methods: {
     toggleMenu() {
       const navbar = document.querySelector('.navbar')
-      const btn = navbar.querySelector('.navbar-hamburger')
-      const willOpen = !navbar.classList.contains('open')
       navbar.classList.toggle('open')
-      if (btn) btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false')
+      const btn = navbar.querySelector('.navbar-hamburger')
+      if (btn)
+        btn.setAttribute('aria-expanded', navbar.classList.contains('open') ? 'true' : 'false')
     },
     scrollToSection(event) {
       event.preventDefault()
       const href = event.target.getAttribute('href')
       const section = document.querySelector(href)
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' })
-      }
+      if (section) section.scrollIntoView({ behavior: 'smooth' })
       const navbar = document.querySelector('.navbar')
       navbar.classList.remove('open')
     },
     async downloadCV(event) {
-      event.preventDefault() // Prevenimos la navegación normal
-      const navbar = document.querySelector('.navbar')
-      const cvPath = '/cv.pdf'
-      const cvName = 'Thomas_Linares_CV.pdf'
-
+      event.preventDefault()
+      const cvPath = `${import.meta.env.BASE_URL}cv.pdf`
       try {
-        // Hacemos la petición para obtener el archivo como un blob
-        const response = await fetch(cvPath)
-        if (!response.ok) {
-          throw new Error(
-            'No se pudo descargar el CV. Verifique que el archivo existe en la carpeta `public`.',
-          )
-        }
+        const response = await fetch(cvPath, { cache: 'no-store' })
+        if (!response.ok)
+          throw new Error('No se pudo descargar el CV. Verifique que cv.pdf está en /public.')
         const blob = await response.blob()
-
-        // Creamos un enlace temporal en memoria para iniciar la descarga
         const url = window.URL.createObjectURL(blob)
         const link = document.createElement('a')
         link.href = url
-        link.setAttribute('download', cvName) // El nombre que tendrá el archivo descargado
+        link.setAttribute('download', this.cvFileName)
         document.body.appendChild(link)
         link.click()
-
-        // Limpiamos el enlace temporal
-        link.parentNode.removeChild(link)
+        link.remove()
         window.URL.revokeObjectURL(url)
-      } catch (error) {
-        console.error(error)
-        alert(error.message)
+      } catch (e) {
+        console.error(e)
+        alert(e.message)
       }
-
-      // Cerramos el menú en móvil después de la operación
-      if (navbar.classList.contains('open')) {
-        navbar.classList.remove('open')
-      }
+      const navbar = document.querySelector('.navbar')
+      if (navbar.classList.contains('open')) navbar.classList.remove('open')
     },
   },
 }
