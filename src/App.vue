@@ -1,9 +1,9 @@
 <script setup>
-import Navbar from './components/navbar.vue'
-import Home from './views/Home.vue'
-import Experience from './views/Experience.vue'
-import About from './views/About.vue'
-import Skills from './views/Skills.vue'
+import Navbar from '@/components/navbar.vue'
+import Home from '@/views/Home.vue'
+import Experience from '@/views/Experience.vue'
+import About from '@/views/About.vue'
+import Skills from '@/views/Skills.vue'
 import './assets/base.css'
 import { ref, onMounted, onUnmounted } from 'vue'
 const showScrollTop = ref(false)
