@@ -1,3 +1,62 @@
+/* Estilos globales para congruencia visual */
+body {
+  background: linear-gradient(135deg, #222f3e 0%, #178358 100%);
+  color: #fff;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #42b983;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+a {
+  color: #42b983;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #178358;
+}
+
+.card, .skill-card, .experience-item, .project-card {
+  background: #222f3e;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(23, 131, 88, 0.15);
+  border: 1px solid #178358;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+.card:hover, .skill-card:hover, .experience-item:hover, .project-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 6px 32px rgba(23, 131, 88, 0.22);
+  border-color: #42b983;
+}
+
+button, .btn, .btn-social {
+  background: #178358;
+  color: #fff;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+button:hover, .btn:hover, .btn-social:hover {
+  background: #42b983;
+  box-shadow: 0 2px 8px rgba(23, 131, 88, 0.18);
+}
+
+hr {
+  border: none;
+  border-top: 2px solid #178358;
+  width: 80%;
+  margin: 2rem auto;
+}
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
   --vt-c-white: #ffffff;
@@ -83,4 +142,13 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+section {
+  scroll-margin-top: 140px;
+}
+@media (max-width: 768px) {
+  section {
+    scroll-margin-top: 110px;
+  }
 }
