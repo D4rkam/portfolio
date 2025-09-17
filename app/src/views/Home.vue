@@ -8,6 +8,20 @@
         <circle class="bubble" cx="900" cy="350" r="14" fill="#42b983" fill-opacity="0.10" />
         <circle class="bubble" cx="400" cy="550" r="20" fill="#42b983" fill-opacity="0.13" />
       </svg>
+      <!-- Nuevo SVG solo móvil (animación vertical) -->
+      <svg
+        class="bubbles-vertical"
+        viewBox="0 0 300 600"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <circle class="bubble-v" cx="150" cy="520" r="34" fill="#42b983" fill-opacity="0.16" />
+        <circle class="bubble-v" cx="120" cy="410" r="22" fill="#42b983" fill-opacity="0.12" />
+        <circle class="bubble-v" cx="180" cy="300" r="28" fill="#42b983" fill-opacity="0.18" />
+        <circle class="bubble-v" cx="130" cy="200" r="16" fill="#42b983" fill-opacity="0.14" />
+        <circle class="bubble-v" cx="170" cy="100" r="20" fill="#42b983" fill-opacity="0.11" />
+      </svg>
     </div>
     <div class="home-content">
       <div class="avatar-container">
@@ -33,16 +47,16 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  width: 100vw;
-  overflow-x: hidden;
+  width: 100%; /* antes 100vw causaba overflow horizontal en móviles */
   padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .home-bg {
   position: absolute;
   left: 0;
   top: 0;
-  width: 100vw;
+  width: 100%; /* antes 100vw */
   height: 100vh;
   z-index: 0;
   pointer-events: none;
@@ -50,7 +64,7 @@
 }
 
 .bubbles {
-  width: 100vw;
+  width: 100%; /* antes 100vw */
   height: 100vh;
 }
 
@@ -81,6 +95,53 @@
   100% {
     transform: translateY(-60px) scale(1.1);
   }
+}
+
+.bubbles-vertical {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes bubbleVerticalFloat {
+  0% {
+    transform: translateY(40px) scale(1);
+    filter: blur(0);
+  }
+  50% {
+    transform: translateY(-100px) scale(1.08);
+    filter: blur(1px);
+  }
+  100% {
+    transform: translateY(40px) scale(1);
+    filter: blur(0);
+  }
+}
+
+.bubbles-vertical .bubble-v {
+  animation: bubbleVerticalFloat 7.5s ease-in-out infinite;
+}
+
+.bubbles-vertical .bubble-v:nth-child(2) {
+  animation-duration: 8.2s;
+  animation-delay: 0.6s;
+}
+
+.bubbles-vertical .bubble-v:nth-child(3) {
+  animation-duration: 9s;
+  animation-delay: 1.2s;
+}
+
+.bubbles-vertical .bubble-v:nth-child(4) {
+  animation-duration: 7s;
+  animation-delay: 0.9s;
+}
+
+.bubbles-vertical .bubble-v:nth-child(5) {
+  animation-duration: 8.6s;
+  animation-delay: 0.3s;
 }
 
 .home-content {
@@ -165,40 +226,60 @@
     text-align: center;
     gap: 2rem;
   }
-
-  .avatar {
-    width: 250px;
-    height: 250px;
+  .home {
+    padding: 0 1.25rem; /* pequeño ajuste para respiración lateral */
   }
-
+  .avatar {
+    width: 280px; /* antes 250px: más grande en mobile */
+    height: 280px;
+  }
   .presentation {
     align-items: center;
     font-size: 28px;
     max-width: 100%;
   }
+  .bubbles {
+    /* subir y escalar animación para que se vea detrás del contenido */
+    transform: translateY(-40px) scale(1.15);
+  }
 }
 
 @media (max-width: 576px) {
   .avatar {
-    width: 200px;
-    height: 200px;
+    width: 240px; /* antes 200px */
+    height: 240px;
   }
-
   .presentation {
-    font-size: 24px;
+    font-size: 26px; /* ligerísimo ajuste */
+  }
+  .bubbles {
+    transform: translateY(-60px) scale(1.25); /* más subida para pantallas pequeñas */
+  }
+  .bubbles-vertical {
+    opacity: 0.9;
+  }
+  .bubbles-vertical .bubble-v {
+    animation-duration: 8.5s;
   }
 }
 
 @media (max-width: 400px) {
   .avatar {
-    width: 180px;
-    height: 180px;
+    width: 220px; /* antes 180px */
+    height: 220px;
   }
-
   .presentation {
-    font-size: 20px;
+    font-size: 22px; /* mantener legibilidad */
   }
-
+  .bubbles {
+    transform: translateY(-70px) scale(1.3);
+  }
+  .bubbles-vertical {
+    opacity: 0.85;
+  }
+  .bubbles-vertical .bubble-v {
+    animation-duration: 9s;
+  }
   .home {
     padding: 0 0.5rem;
   }

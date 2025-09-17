@@ -3,15 +3,21 @@
     <h2 id="title">Sobre mí</h2>
     <div class="about-content">
       <div class="about-img">
-        <img src="@/assets/avatar.jpeg" alt="Avatar" />
+        <img src="@/assets/about.jpg" alt="Foto sobre mí" />
       </div>
       <div class="about-info">
         <h2>
           <span class="name">Thomas Linares</span>,<br /><span class="profession"
-            >Desarrollador Web</span
+            >Desarrollador de Software</span
           >
         </h2>
-        <p>Soy desarrollador web especializado en Vue.js y tecnologías modernas.</p>
+        <p>
+          Soy Técnico Informático egresado de la Escuela Técnica N.° 2 de Berisso y actualmente
+          estudio Ingeniería en Sistemas en la UTN. Me apasiona la tecnología, disfruto aprender de
+          forma constante y llevar a cabo proyectos que me permitan crecer. Python es mi fuerte,
+          aunque siempre busco experimentar con nuevos lenguajes y herramientas para ampliar mis
+          horizontes.
+        </p>
         <div class="social-links social-bottom">
           <a
             href="https://www.linkedin.com/in/thomas-linares-469902323/"
@@ -159,9 +165,17 @@
     gap: 1.5rem;
   }
   .about-img img {
-    width: 160px;
-    height: 160px;
-    border-radius: 0;
+    width: 200px; /* antes 160px */
+    height: 200px; /* ajustado proporcionalmente */
+    border-radius: 20%; /* redondeado como en Home */
+  }
+  .about-info {
+    align-items: center; /* centra contenido */
+    text-align: center; /* centra texto */
+    height: auto; /* permite crecer si el texto ocupa más */
+  }
+  .social-links {
+    justify-content: center; /* centra los botones */
   }
 }
 </style>

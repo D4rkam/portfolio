@@ -65,6 +65,23 @@
         />
         <h3>FastAPI</h3>
       </div>
+      <!-- NUEVAS: Flask y Django -->
+      <div class="skill-card">
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg"
+          alt="Flask"
+          style="filter: invert(70%) sepia(20%) saturate(300%) hue-rotate(90deg)"
+        />
+        <h3>Flask</h3>
+      </div>
+      <div class="skill-card">
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"
+          alt="Django"
+        />
+        <h3>Django</h3>
+      </div>
+      <!-- FIN NUEVAS: Flask y Django -->
       <div class="skill-card">
         <img
           src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
@@ -72,6 +89,22 @@
         />
         <h3>SQL</h3>
       </div>
+      <!-- NUEVAS HABILIDADES -->
+      <div class="skill-card">
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg"
+          alt="Arduino"
+        />
+        <h3>Arduino</h3>
+      </div>
+      <div class="skill-card">
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+          alt="C++"
+        />
+        <h3>C++</h3>
+      </div>
+      <!-- FIN NUEVAS HABILIDADES -->
     </div>
   </section>
 </template>
@@ -137,6 +170,26 @@
   text-align: center;
   font-weight: 600;
   letter-spacing: 0.5px;
+}
+@media (max-width: 600px) {
+  .skills-list {
+    grid-template-columns: repeat(2, 150px) !important; /* 2 columnas fijas */
+    justify-content: center; /* centra las columnas dentro del grid */
+    justify-items: center; /* centra el contenido de cada celda */
+    gap: 1rem 1.2rem; /* filas x columnas */
+    max-width: 340px; /* 2*150 + gaps (aprox) */
+    margin: 0 auto; /* centra el contenedor */
+    width: 100%;
+  }
+  .skill-card {
+    width: 150px; /* coincide con el track */
+    min-height: 150px;
+    padding: 1rem 0.5rem 0.75rem;
+  }
+  .skill-card img {
+    width: 50px;
+    height: 50px;
+  }
 }
 @media (max-width: 900px) {
   .skills-list {
