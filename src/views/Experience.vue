@@ -241,25 +241,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import ExperienceCard from '@/components/ExperienceCard.vue'
-
-const experiences = ref([
-  {
-    title: 'Proyecto Alpha',
-    location: 'Buenos Aires, Argentina',
-    date: 'Enero 2022 - Diciembre 2022',
-    description:
-      'Desarrollo de una plataforma web para gestión de inventarios, integrando tecnologías modernas y metodologías ágiles. Este texto es más largo para demostrar la funcionalidad de "Leer más" en dispositivos móviles, asegurando que el diseño se mantenga limpio y ordenado.',
-  },
-  {
-    title: 'Proyecto Beta',
-    location: 'Córdoba, Argentina',
-    date: 'Marzo 2021 - Noviembre 2021',
-    description:
-      'Implementación de un sistema de control de acceso para empresas, con autenticación biométrica y reportes en tiempo real. El desafío principal fue la optimización de las consultas a la base de datos y la seguridad en la transmisión de datos sensibles, lo cual requirió una investigación exhaustiva.',
-  },
-])
+import { onMounted, onUnmounted } from 'vue'
 
 function applyClamp() {
   const isMobile = window.innerWidth <= 768
@@ -313,7 +295,10 @@ onUnmounted(() => {
 .experience {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* Evitamos centrar hijos para que el ancho 100% del contenedor interno no genere efectos ópticos */
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
 }
 .experience h2 {
   color: #fff;
@@ -327,8 +312,13 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  width: 70%;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 1020px; /* ligero ajuste para compensar bordes y escala hover */
+  margin-inline: auto;
+  /* Gutter fluido pero consistente y perfectamente simétrico */
+  padding-left: clamp(1rem, 5vw, 1.5rem);
+  padding-right: clamp(1rem, 5vw, 1.5rem);
+  box-sizing: border-box;
 }
 .experience-item {
   display: flex;
@@ -340,10 +330,12 @@ onUnmounted(() => {
   border-radius: 12px;
   border: 1px solid #178358;
   box-shadow: none;
+  box-sizing: border-box;
   transition:
     box-shadow 0.2s,
     transform 0.2s,
     border-color 0.2s;
+  transform-origin: center center; /* Evita desplazamiento óptico en hover */
 }
 .experience-item:hover {
   transform: translateY(-6px) scale(1.03);
@@ -467,11 +459,17 @@ onUnmounted(() => {
   gap: 1rem;
 }
 
+@media (max-width: 900px) {
+  .experience-item {
+    gap: 1.5rem;
+    padding: 1.6rem 1.6rem 1.7rem;
+  }
+}
 @media (max-width: 768px) {
   .experience-item {
     flex-direction: column;
     gap: 1rem;
-    padding: 1rem;
+    padding: 1.1rem 1rem 1.35rem; /* simétrico con gutter externo */
   }
   /* Truncado sólo en móvil */
   .desc-text.truncated {
@@ -484,6 +482,20 @@ onUnmounted(() => {
   }
   .read-more-btn {
     display: inline;
+  }
+  /* Reducimos escala hover para que no parezca que se pega al borde derecho */
+  .experience-item:hover {
+    transform: translateY(-4px) scale(1.015);
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-list {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .experience-item {
+    padding: 1rem 0.9rem 1.2rem;
   }
 }
 </style>

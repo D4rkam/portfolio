@@ -129,28 +129,31 @@
 }
 .skills-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* Siempre 3 columnas */
+  gap: 1.75rem 2rem;
   width: 100%;
-  max-width: 900px;
+  max-width: 960px;
   justify-items: center;
+  box-sizing: border-box;
 }
 /* Card unificada con el diseño general */
 .skill-card {
   background: transparent;
   border-radius: 12px;
   box-shadow: none;
-  padding: 1rem 0.5rem 0.5rem 0.5rem;
+  padding: 1rem 0.75rem 0.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 150px;
-  min-height: 120px;
+  width: 100%; /* ocupa el track completo */
+  max-width: 170px; /* evita tarjetas demasiado anchas en pantallas grandes */
+  min-height: 130px;
   transition:
     box-shadow 0.2s,
     transform 0.2s;
   border: 1px solid #178358;
+  box-sizing: border-box;
 }
 .skill-card:hover {
   transform: translateY(-6px) scale(1.03);
@@ -171,35 +174,45 @@
   font-weight: 600;
   letter-spacing: 0.5px;
 }
-@media (max-width: 600px) {
-  .skills-list {
-    grid-template-columns: repeat(2, 150px) !important; /* 2 columnas fijas */
-    justify-content: center; /* centra las columnas dentro del grid */
-    justify-items: center; /* centra el contenido de cada celda */
-    gap: 1rem 1.2rem; /* filas x columnas */
-    max-width: 340px; /* 2*150 + gaps (aprox) */
-    margin: 0 auto; /* centra el contenedor */
-    width: 100%;
-  }
-  .skill-card {
-    width: 150px; /* coincide con el track */
-    min-height: 150px;
-    padding: 1rem 0.5rem 0.75rem;
-  }
-  .skill-card img {
-    width: 50px;
-    height: 50px;
-  }
-}
+/* Ordenamos breakpoints de grande a pequeño para evitar overrides inesperados */
 @media (max-width: 900px) {
   .skills-list {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1rem;
+    gap: 1.4rem 1.5rem;
   }
   .skill-card {
-    width: 160px;
-    min-height: 180px;
-    padding: 1.2rem 0.5rem 0.5rem 0.5rem;
+    min-height: 145px;
+  }
+}
+@media (max-width: 600px) {
+  .skills-list {
+    gap: 1rem 0.9rem;
+    padding: 0 0.4rem;
+  }
+  .skill-card {
+    min-height: 135px;
+    padding: 0.9rem 0.55rem 0.65rem;
+  }
+  .skill-card img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.7rem;
+  }
+}
+@media (max-width: 420px) {
+  .skills-list {
+    gap: 0.75rem 0.6rem;
+    padding: 0 0.35rem;
+  }
+  .skill-card {
+    min-height: 128px;
+    padding: 0.75rem 0.4rem 0.55rem;
+  }
+  .skill-card img {
+    width: 44px;
+    height: 44px;
+  }
+  .skill-card h3 {
+    font-size: 0.9rem;
   }
 }
 </style>
