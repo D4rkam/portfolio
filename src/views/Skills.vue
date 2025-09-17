@@ -115,7 +115,7 @@
 
 <style scoped>
 .skills {
-  width: 80%;
+  width: 90%;
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
@@ -132,7 +132,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr)); /* Siempre 3 columnas */
   gap: 1.75rem 2rem;
   width: 100%;
-  max-width: 960px;
+  max-width: 1100px; /* un poco más ancho */
   justify-items: center;
   box-sizing: border-box;
 }
@@ -147,7 +147,7 @@
   align-items: center;
   justify-content: center;
   width: 100%; /* ocupa el track completo */
-  max-width: 170px; /* evita tarjetas demasiado anchas en pantallas grandes */
+  max-width: 220px; /* permite ocupar un poco más de ancho sin excederse */
   min-height: 130px;
   transition:
     box-shadow 0.2s,
